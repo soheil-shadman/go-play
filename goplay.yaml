@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod                                        
+metadata:
+  name: goplay
+  labels:
+    app: goplay                        
+spec:                                              
+  containers:
+    - image: dreadelus/goplay 
+      name: goplay                             
+      ports:
+        - containerPort: 8080                          

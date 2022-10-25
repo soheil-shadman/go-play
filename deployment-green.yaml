@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment                                          # 1
+metadata:
+  name: goplay-deploy
+spec:
+  selector:                                               # 2
+    matchLabels:
+      app: goplay 
+  replicas: 2                                             # 3
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate                                   # 4
+    rollingUpdate: 
+      maxUnavailable: 1                                   # 5
+      maxSurge: 1                                         # 6
+  template:                                               # 7
+    metadata:
+      labels:
+        app: goplay                              # 8
+    spec:
+      containers:
+        - image: dreadelus/goplay
+          imagePullPolicy: Always                         # 9
+          name: goplay
+          ports:
+            - containerPort: 8080
